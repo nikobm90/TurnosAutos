@@ -9,58 +9,51 @@ class Usuario
         $this->connection = ConnectionTwitter::getInstance();
     }
     
-    public function getCantidad(){  
-        $query = "SELECT COUNT(usuarioID) AS cantidad FROM usuarios";
-        $cantidad = $this->connection->query($query);
-        return $cantidad->fetch_assoc();
-    }
-
-     public function getUser($id){  
-        $query = "SELECT * FROM usuarios WHERE usuarioID = '".$id."'";
+    public function getUser($id){  
+        $query = "SELECT * FROM usuarios WHERE UsuarioID = '$id'";
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }
 
-    public function validateUser($id,$password){
-        /*$userName = $this->connection->real_escape_string($user['userName']);
-        $password = $this->connection->real_escape_string($user['password']);  */    
-        $query = "SELECT * FROM usuarios WHERE mail = '".$id."' AND password = '". $password . "'
-                    OR telefono = '".$id."' AND password = '". $password ."'
-                    OR userName = '".$id."' AND password = '". $password ."'";
+    public function validateUser($id,$password){   
+        $query = "SELECT * FROM usuarios WHERE UserName = '$id' AND Password = '$password'";
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }
 
     public function validateMail($mail){
-        $query = "SELECT * FROM usuarios WHERE mail = '".$mail."'";                 
+        $query = "SELECT * FROM usuarios WHERE Email = '$mail'";                 
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }
 
-     public function validateUserName($userName){
-        $query = "SELECT * FROM usuarios WHERE userName = '".$userName."'";                 
+    public function validateUserName($userName){
+        $query = "SELECT * FROM usuarios WHERE UserName = '$userName'";                 
         $r = $this->connection->query($query);
         return $r->fetch_assoc();
     }
 
     public function createUser($user){
-        $nombreCompleto = $this->connection->real_escape_string($user['nombreCompleto']);
-        $mail = $this->connection->real_escape_string($user['mail']);
-        $password = $this->connection->real_escape_string($user['password']);
-        $telefono = $this->connection->real_escape_string($user['telefono']);
-        $userName = $this->connection->real_escape_string($user['userName']);
-       
+        $perfilId = $this->connection->real_escape_string($user['PerfilID']);
+        $nombre = $this->connection->real_escape_string($user['Nombre']);
+        $apellido = $this->connection->real_escape_string($user['Apellido']);
+        $userName = $this->connection->real_escape_string($user['UserName']);
+        $telefono = $this->connection->real_escape_string($user['Telefono']);
+        $email = $this->connection->real_escape_string($user['Email']);
+        $password = $this->connection->real_escape_string($user['Password']);
+
         $query = "INSERT INTO usuarios VALUES (
                     DEFAULT,
-                    '$nombreCompleto',
-                    '$mail',
-                    '$password',
-                    '$telefono',
+                    '$perfilId',
+                    '$nombre',
+                    '$apellido',
                     '$userName',
-                    '')";
+                    '$telefono',
+                    '$email',
+                    '$password')";
 
         if($this->connection->query($query)){
-            $user['usuarioID'] = $this->connection->insert_id;
+            $user['UsuarioID'] = $this->connection->insert_id;
             return $user;
         }else{
             return false;
@@ -68,19 +61,24 @@ class Usuario
     }
 
     public function updateUser($user){
-        $usuarioID = $this->connection->real_escape_string($user['usuarioID']);
-        $nombreCompleto = $this->connection->real_escape_string($user['nombreCompleto']);
-        $mail = $this->connection->real_escape_string($user['mail']);
-        $password = $this->connection->real_escape_string($user['password']);
-        $telefono = $this->connection->real_escape_string($user['telefono']);
-        $userName = $this->connection->real_escape_string($user['userName']);
+        $usuarioID = $this->connection->real_escape_string($user['UsuarioID']);
+        $perfilId = $this->connection->real_escape_string($user['PerfilID']);
+        $nombre = $this->connection->real_escape_string($user['Nombre']);
+        $apellido = $this->connection->real_escape_string($user['Apellido']);
+        $userName = $this->connection->real_escape_string($user['UserName']);
+        $telefono = $this->connection->real_escape_string($user['Telefono']);
+        $email = $this->connection->real_escape_string($user['Email']);
+        $password = $this->connection->real_escape_string($user['Password']);
        
         $query = "UPDATE usuarios SET 
-                    nombreCompleto = '$nombreCompleto',
-                    mail = '$mail',
-                    password = '$password',
-                    telefono = '$telefono'
-                    WHERE usuarioID = '$usuarioID'";
+                    PerfilID = '$perfilId',
+                    Nombre = '$nombre',
+                    Apellido = '$apellido',
+                    UserName = '$userName',
+                    Telefono = '$telefono',
+                    Email = '$email',
+                    Password = '$password'
+                    WHERE UsuarioID = '$usuarioID'";
 
         if($this->connection->query($query)){
             return true;

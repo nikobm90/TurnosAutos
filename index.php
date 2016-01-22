@@ -3,7 +3,7 @@
 <div class="container login">
 	<div class="row">
 		<div class="col-md-6 divTexto">
-        	<h1>Bienvenido a Twitter.</h1>
+        	<h1>Bienvenido a SAT.</h1>
         	<p>Conéctate con tus amigos y otras personas fascinantes. Obtén actualizaciones instantáneas de las cosas que te interesan. Mira los eventos que se están desarrollando, en tiempo real, desde todos los ángulos.</p>
     	</div>
     	<div class="col-md-3 divForm">
@@ -35,15 +35,6 @@
 					</div>
 		        </div>
 			</form>
-			<form class="form-horizontal" method="POST" action="formRegistro.php" id="form-registro">
-		        <div class="form-group has-feedback formRegistrarse">
-		        	<h2><strong>¿Eres nuevo en Twitter?</strong> Regístrate</h2>
-		            <input  name="nombreCompleto" id="nombreCompleto" placeholder="Nombre Completo" type="text" class="form-control margenTextbox" >
-	            	<input  name="mail" id="mail" placeholder="Correo Electrónico" type="text" class="form-control margenTextbox" >
-	            	<input  name="password" id="password" placeholder="Contraseña" type="password" class="form-control margenTextbox">
-	            	<button id="btnRegistrarse" type="submit" name="action" value="redirecRegistrar" class="btn btn-warning pull-right margenTextbox">Registrate en Twitter</button>	          	
-		        </div>				
-	        </form>
     	</div>
 	</div>
 </div>

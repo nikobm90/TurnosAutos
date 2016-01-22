@@ -24,7 +24,7 @@ class ConnectionTwitter extends MySQLi {
      const HOST = 'localhost';
      const USER = 'root';
      const PASSWORD = 'admin';       
-     const DATABASE = 'twitter';
+     const DATABASE = 'sat';
          
      private function __construct($host, $user, $password, $database){ 
          parent::__construct($host, $user, $password, $database);
